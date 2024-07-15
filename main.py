@@ -8,5 +8,5 @@ if __name__ == '__main__':
     #test
     global_config = Config()
     chenchao = JdUser(global_config)
-    chenchao_gui = RushGUI(chenchao)
+    chenchao_gui = RushGUI(chenchao1)
 
