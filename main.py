@@ -74,6 +74,13 @@ def get_local_temperature():
         return f"An error occurred: {str(e)}"
 
 
+def add_author_name(name):
+    """
+    Adds the author's name to a string.
+    """
+    return f"Author: {name}"
+
+
 if __name__ == '__main__':
     #test
     global_config = Config()
