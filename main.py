@@ -5,6 +5,20 @@ from interface import RushGUI
 from log import logger
 
 
+def create_random_word():
+    """
+    Creates a random English word from a predefined list.
+    """
+    common_words = [
+        'apple', 'banana', 'cherry', 'date', 'elder',
+        'fig', 'grape', 'honey', 'iris', 'kiwi',
+        'lemon', 'mango', 'nectarine', 'orange', 'peach',
+        'quince', 'raspberry', 'strawberry', 'tangerine', 'ugli',
+        'vanilla', 'watermelon', 'xigua', 'yuzu', 'zucchini'
+    ]
+    return random.choice(common_words)
+
+
 def multiply_two_numbers(a, b):
     """
     Returns the product of two numbers.
