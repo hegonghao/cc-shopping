@@ -54,15 +54,23 @@ def get_local_temperature():
     
     complete_url = f"{base_url}q={city_name},{country_code}&appid={api_key}&units=metric"
     
-    response = requests.get(complete_url)
-    data = response.json()
-    
-    if data["cod"] != "404":
-        main_data = data["main"]
-        current_temperature = main_data["temp"]
-        return f"The current temperature in {city_name} is {current_temperature}°C"
-    else:
-        return "City not found or API error"
+    try:
+        response = requests.get(complete_url, timeout=10)
+        response.raise_for_status()  # Raises an HTTPError if the HTTP request returned an unsuccessful status code
+        data = response.json()
+        
+        if data["cod"] != "404":
+            main_data = data["main"]
+            current_temperature = main_data["temp"]
+            return f"The current temperature in {city_name} is {current_temperature}°C"
+        else:
+            return "City not found"
+    except requests.exceptions.RequestException as e:
+        return f"An error occurred while fetching the weather data: {str(e)}"
+    except KeyError as e:
+        return f"Unexpected data format in API response: {str(e)}"
+    except Exception as e:
+        return f"An unexpected error occurred: {str(e)}"
 
 
 if __name__ == '__main__':
