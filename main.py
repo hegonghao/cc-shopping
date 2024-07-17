@@ -1,4 +1,5 @@
 import random
+import requests
 from jd_user import JdUser
 from config import Config
 from interface import RushGUI
@@ -37,6 +38,31 @@ def generate_random_chinese_word():
         '左', '右', '大', '小', '多', '少', '高', '低', '长', '短'
     ]
     return random.choice(chinese_chars)
+
+
+def get_local_temperature():
+    """
+    Gets the current local temperature using OpenWeatherMap API.
+    You need to replace 'YOUR_API_KEY' with your actual OpenWeatherMap API key.
+    """
+    api_key = 'YOUR_API_KEY'
+    base_url = 'http://api.openweathermap.org/data/2.5/weather?'
+    
+    # You may want to replace these with your actual city and country code
+    city_name = 'Beijing'
+    country_code = 'CN'
+    
+    complete_url = f"{base_url}q={city_name},{country_code}&appid={api_key}&units=metric"
+    
+    response = requests.get(complete_url)
+    data = response.json()
+    
+    if data["cod"] != "404":
+        main_data = data["main"]
+        current_temperature = main_data["temp"]
+        return f"The current temperature in {city_name} is {current_temperature}°C"
+    else:
+        return "City not found or API error"
 
 
 if __name__ == '__main__':
