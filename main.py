@@ -27,6 +27,13 @@ def multiply_two_numbers(a, b):
     return a * b
 
 
+def add_two_numbers(a, b):
+    """
+    Returns the sum of two numbers.
+    """
+    return a + b
+
+
 def generate_random_chinese_word():
     """
     Generates a random Chinese word (character).
