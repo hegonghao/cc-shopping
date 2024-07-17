@@ -55,7 +55,7 @@ def get_local_temperature():
     api_key = 'YOUR_API_KEY'
     base_url = 'http://api.openweathermap.org/data/2.5/weather?'
     
-    city_name = 'Beijing'
+    city_name = 'Wuhan'
     country_code = 'CN'
     
     complete_url = f"{base_url}q={city_name},{country_code}&appid={api_key}&units=metric"
