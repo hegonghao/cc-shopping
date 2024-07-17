@@ -48,7 +48,6 @@ def get_local_temperature():
     api_key = 'YOUR_API_KEY'
     base_url = 'http://api.openweathermap.org/data/2.5/weather?'
     
-    # You may want to replace these with your actual city and country code
     city_name = 'Beijing'
     country_code = 'CN'
     
@@ -56,21 +55,16 @@ def get_local_temperature():
     
     try:
         response = requests.get(complete_url, timeout=10)
-        response.raise_for_status()  # Raises an HTTPError if the HTTP request returned an unsuccessful status code
+        response.raise_for_status()
         data = response.json()
         
         if data["cod"] != "404":
-            main_data = data["main"]
-            current_temperature = main_data["temp"]
+            current_temperature = data["main"]["temp"]
             return f"The current temperature in {city_name} is {current_temperature}°C"
         else:
             return "City not found"
-    except requests.exceptions.RequestException as e:
-        return f"An error occurred while fetching the weather data: {str(e)}"
-    except KeyError as e:
-        return f"Unexpected data format in API response: {str(e)}"
     except Exception as e:
-        return f"An unexpected error occurred: {str(e)}"
+        return f"An error occurred: {str(e)}"
 
 
 if __name__ == '__main__':
